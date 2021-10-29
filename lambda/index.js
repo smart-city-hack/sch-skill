@@ -26,7 +26,7 @@ const SearchBetterTrafficLightIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SearchBetterTrafficLightIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'I can help you cross the street. Just say: help me';
+        const speakOutput = 'With this intent I would tell you where the nearest accessible traffic light is';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
