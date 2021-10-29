@@ -45,7 +45,7 @@ const HelloWorldIntentHandler = {
       console.log('headers:', res.headers);
 
       res.on('data', (d) => {
-        responseString += 'asd';
+        responseString += d;
       });
 
       res.on('end', function(res) {
