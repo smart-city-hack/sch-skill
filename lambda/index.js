@@ -67,7 +67,7 @@ const HelpIntentHandler = {
         //var json_hash = JSON.parse(responseString);
         // grab the first answer returned as text and have Alexa read it
         //const speechOutput = json_hash['results'][0]['content']['text'];
-        console.log('==> Answering: ', speechOutput);
+        console.log('==> Answering: ', responseString);
         // speak the output
         return handlerInput.responseBuilder.speak(responseString).getResponse();
       });
