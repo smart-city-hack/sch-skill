@@ -55,7 +55,7 @@ const HelpIntentHandler = {
       }
     };
 
-    https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
+    https.get('sch.barmetler.com/alexa/help', get_options, (res) => {
       console.log('statusCode:', res.statusCode);
       console.log('headers:', res.headers);
 
