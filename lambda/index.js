@@ -20,6 +20,21 @@ const LaunchRequestHandler = {
     }
 };
 
+const SearchBetterTrafficLightIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && (Alexa.getIntentName(handlerInput.requestEnvelope) === 'SearchBetterTrafficLightIntent');
+    },
+    handle(handlerInput) {
+        const speakOutput = 'I would tell you a better traffic light crossing';
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
