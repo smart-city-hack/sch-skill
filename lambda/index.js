@@ -4,6 +4,7 @@
  * session persistence, api calls, and more.
  * */
 const Alexa = require('ask-sdk-core');
+const https = require('https');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -40,13 +41,41 @@ const HelpIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'I do not have freaking eyes, I can not help you, sorry...';
+    //var question = handlerInput.requestEnvelope.request.intent.slots['question'].value;
+    //console.log('mydata:', question);
+    var responseString = '';
 
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-    }
+    var data = {
+      //simplequery: question,
+      //channel: 'Alexa'
+    };
+    var get_options = {
+      //headers: {
+        //'Subscription-Key': subscription_key
+      //}
+    };
+
+    https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
+      console.log('statusCode:', res.statusCode);
+      console.log('headers:', res.headers);
+
+      res.on('data', (d) => {
+        responseString += d;
+      });
+
+      res.on('end', function(res) {
+        //var json_hash = JSON.parse(responseString);
+        // grab the first answer returned as text and have Alexa read it
+        //const speechOutput = json_hash['results'][0]['content']['text'];
+        //console.log('==> Answering: ', speechOutput);
+        // speak the output
+        return handlerInput.responseBuilder.speak(responseString).getResponse();
+      });
+    }).on('error', (e) => {
+      console.error(e);
+      return handlerInput.responseBuilder.speak("I'm sorry I ran into an error").getResponse();
+    });
+  }
 };
 
 const CancelAndStopIntentHandler = {
