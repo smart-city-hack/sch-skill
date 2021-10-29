@@ -43,7 +43,7 @@ const HelpIntentHandler = {
     handle(handlerInput) {
     //var question = handlerInput.requestEnvelope.request.intent.slots['question'].value;
     //console.log('mydata:', question);
-    var responseString = 'empty';
+    var responseString = '';
 
     var data = {
       //simplequery: question,
