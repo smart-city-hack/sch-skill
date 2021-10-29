@@ -50,9 +50,9 @@ const HelpIntentHandler = {
       //channel: 'Alexa'
     };
     var get_options = {
-      //headers: {
-        //'Subscription-Key': subscription_key
-      //}
+      headers: {
+        'Subscription-Key': "asd"
+      }
     };
 
     https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
