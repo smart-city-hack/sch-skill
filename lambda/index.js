@@ -69,12 +69,20 @@ const HelpIntentHandler = {
         //const speechOutput = json_hash['results'][0]['content']['text'];
         console.log('==> Answering: ', responseString);
         // speak the output
-        return handlerInput.responseBuilder.speak(responseString).getResponse();
+        //return handlerInput.responseBuilder.speak(responseString).getResponse();
+        return handlerInput.responseBuilder
+            .speak(responseString)
+            .reprompt(responseString)
+            .getResponse();
       });
     }).on('error', (e) => {
       console.error(e);
       return handlerInput.responseBuilder.speak("I'm sorry I ran into an error").getResponse();
     });
+    return handlerInput.responseBuilder
+            .speak("how did we get here")
+            .reprompt("how did we get here")
+            .getResponse();
   }
 };
 
