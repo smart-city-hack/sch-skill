@@ -26,13 +26,48 @@ const HelloWorldIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hello World!';
+    //var question = handlerInput.requestEnvelope.request.intent.slots['question'].value;
+    //console.log('mydata:', question);
+    var responseString = '';
 
+    var data = {
+      //simplequery: question,
+      channel: 'Alexa'
+    };
+    var get_options = {
+      headers: {
+        'Subscription-Key': "asd"
+      }
+    };
+
+    https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
+      console.log('statusCode:', res.statusCode);
+      console.log('headers:', res.headers);
+
+      res.on('data', (d) => {
+        responseString += d;
+      });
+
+      res.on('end', function(res) {
+        //var json_hash = JSON.parse(responseString);
+        // grab the first answer returned as text and have Alexa read it
+        //const speechOutput = json_hash['results'][0]['content']['text'];
+        console.log('==> Answering: ', responseString);
+        // speak the output
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .speak(responseString)
+            .reprompt(responseString)
             .getResponse();
-    }
+      });
+    }).on('error', (e) => {
+      console.error(e);
+      return handlerInput.responseBuilder.speak("I'm sorry I ran into an error").reprompt("I'm sorry I ran into an error").getResponse();
+    });
+    return handlerInput.responseBuilder
+            .speak("I can't help you")
+            .reprompt("I can't help you")
+            .getResponse();
+  }
 };
 
 const HelpIntentHandler = {
