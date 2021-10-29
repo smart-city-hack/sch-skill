@@ -47,7 +47,7 @@ const HelpIntentHandler = {
 
     var data = {
       //simplequery: question,
-      //channel: 'Alexa'
+      channel: 'Alexa'
     };
     var get_options = {
       headers: {
