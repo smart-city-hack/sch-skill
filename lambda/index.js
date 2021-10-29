@@ -55,7 +55,7 @@ const HelpIntentHandler = {
       }
     };
 
-    https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
+    https.get('https://sch.barmetler.com/alexa/state', get_options, (res) => {
       console.log('statusCode:', res.statusCode);
       console.log('headers:', res.headers);
 
@@ -69,7 +69,6 @@ const HelpIntentHandler = {
         //const speechOutput = json_hash['results'][0]['content']['text'];
         console.log('==> Answering: ', responseString);
         // speak the output
-        //return handlerInput.responseBuilder.speak(responseString).getResponse();
         return handlerInput.responseBuilder
             .speak(responseString)
             .reprompt(responseString)
@@ -77,12 +76,8 @@ const HelpIntentHandler = {
       });
     }).on('error', (e) => {
       console.error(e);
-      return handlerInput.responseBuilder.speak("I'm sorry I ran into an error").getResponse();
+      return handlerInput.responseBuilder.speak("I'm sorry I ran into an error").reprompt("I'm sorry I ran into an error").getResponse();
     });
-    return handlerInput.responseBuilder
-            .speak("how did we get here")
-            .reprompt("how did we get here")
-            .getResponse();
   }
 };
 
