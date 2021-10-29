@@ -78,6 +78,10 @@ const HelpIntentHandler = {
       console.error(e);
       return handlerInput.responseBuilder.speak("I'm sorry I ran into an error").reprompt("I'm sorry I ran into an error").getResponse();
     });
+    return handlerInput.responseBuilder
+            .speak("I can't help you")
+            .reprompt("I can't help you")
+            .getResponse();
   }
 };
 
