@@ -21,7 +21,7 @@ module.exports.getS3PreSignedUrl = function getS3PreSignedUrl(s3ObjectKey) {
 const https = require('https');
 module.exports.https = {
     get(url, options) {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             https.get(url, options, res => {
         
                 var responseString = '';
@@ -33,6 +33,8 @@ module.exports.https = {
                 res.on('end', function(res) {
                     resolve(responseString)
                 });
+            }).on('error', e => {
+                reject(e)
             })
         })
     }
