@@ -40,7 +40,7 @@ module.exports.https = {
     },
     post(url, data) {
         return new Promise((resolve, reject) => {
-            https.request(url, { method: 'POST' }, res => {
+            const req = https.request(url, { method: 'POST' }, res => {
         
                 var responseString = '';
         
@@ -54,6 +54,9 @@ module.exports.https = {
             }).on('error', e => {
                 reject(e)
             })
+            
+            req.write(data)
+            req.close()
         })
     }
 }
