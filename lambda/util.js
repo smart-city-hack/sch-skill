@@ -17,3 +17,12 @@ module.exports.getS3PreSignedUrl = function getS3PreSignedUrl(s3ObjectKey) {
     return s3PreSignedUrl;
 
 }
+
+const https = require('https');
+module.exports.https = {
+    get(url, options) {
+        return new Promise(resolve => {
+            
+        })
+    }
+}
