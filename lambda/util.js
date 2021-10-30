@@ -37,5 +37,23 @@ module.exports.https = {
                 reject(e)
             })
         })
+    },
+    post(url, options, data) {
+        return new Promise((resolve, reject) => {
+            https.request(url, { ...(options || {}), method: 'POST' }, res => {
+        
+                var responseString = '';
+        
+                res.on('data', (d) => {
+                    responseString += d;
+                });
+        
+                res.on('end', function(res) {
+                    resolve(responseString)
+                });
+            }).on('error', e => {
+                reject(e)
+            })
+        })
     }
 }
