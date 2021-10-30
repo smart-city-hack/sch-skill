@@ -28,11 +28,19 @@ const SearchBetterTrafficLightIntentHandler = {
     handle(handlerInput) {
         console.log("SearchBetterTrafficLightIntent");
         const speakOutput = 'I would tell you a better traffic light crossing';
-
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
+        return https
+            .get('https://sch.barmetler.com/alexa/nearby')
+            .then(responseString => {
+                return handlerInput.responseBuilder
+                    .speak(responseString)
+                    .reprompt(responseString)
+                    .getResponse()
+            }, e => {
+                return handlerInput.responseBuilder
+                    .speak("I'm sorry I ran into an error")
+                    .reprompt("I'm sorry I ran into an error")
+                    .getResponse()
+            })
     }
 };
 
