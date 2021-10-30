@@ -57,7 +57,7 @@ const HelloWorldIntentHandler = {
       }
     };
     return util.https
-        .get('https://sch.barmetler.com/alexa/help')
+        .get('https://sch.barmetler.com/alexa/help', get_options)
         .then(responseString => {
             return handlerInput.responseBuilder
                 .speak(responseString)
