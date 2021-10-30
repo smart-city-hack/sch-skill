@@ -41,7 +41,7 @@ const HelloWorldIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
     //var question = handlerInput.requestEnvelope.request.intent.slots['question'].value;
     //console.log('mydata:', question);
     var responseString = '';
@@ -56,7 +56,7 @@ const HelloWorldIntentHandler = {
       }
     };
 
-    https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
+    return await https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
       console.log('statusCode:', res.statusCode);
       console.log('headers:', res.headers);
 
@@ -82,10 +82,10 @@ const HelloWorldIntentHandler = {
             .reprompt("I'm sorry I ran into an error")
             .getResponse();
     });
-    return handlerInput.responseBuilder
+    /*return handlerInput.responseBuilder
             .speak("I can't help you")
             .reprompt("I can't help you")
-            .getResponse();
+            .getResponse(); */
   }
 };
 
