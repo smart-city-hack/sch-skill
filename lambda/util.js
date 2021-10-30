@@ -35,21 +35,5 @@ module.exports.https = {
                 });
             })
         })
-    },
-    post(url, options) {
-        return new Promise(resolve => {
-            https.post(url, options, res => {
-        
-                var responseString = '';
-        
-                res.on('data', (d) => {
-                    responseString += d;
-                });
-        
-                res.on('end', function(res) {
-                    resolve(responseString)
-                });
-            })
-        })
     }
 }
