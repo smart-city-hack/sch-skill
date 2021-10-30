@@ -56,6 +56,8 @@ const HelloWorldIntentHandler = {
         'Subscription-Key': "asd"
       }
     };
+    return util.https.get('https://sch.barmetler.com/alexa/help')
+    /*
     return new Promise(resolve => {
         https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
             console.log('statusCode:', res.statusCode);
@@ -86,6 +88,7 @@ const HelloWorldIntentHandler = {
                 .getResponse());
         });
     })
+    */
   }
 };
 
