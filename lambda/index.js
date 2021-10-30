@@ -41,7 +41,7 @@ const HelloWorldIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
     },
-    async handle(handlerInput) {
+    handle(handlerInput) {
     //var question = handlerInput.requestEnvelope.request.intent.slots['question'].value;
     //console.log('mydata:', question);
     var responseString = '';
@@ -55,33 +55,36 @@ const HelloWorldIntentHandler = {
         'Subscription-Key': "asd"
       }
     };
-
-    https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
-      console.log('statusCode:', res.statusCode);
-      console.log('headers:', res.headers);
-
-      res.on('data', (d) => {
-        responseString += d;
-      });
-
-      res.on('end', function(res) {
-        //var json_hash = JSON.parse(responseString);
-        // grab the first answer returned as text and have Alexa read it
-        //const speechOutput = json_hash['results'][0]['content']['text'];
-        console.log('==> Answering: ', responseString);
-        // speak the output
-        return handlerInput.responseBuilder
-            .speak(responseString)
-            .reprompt(responseString)
-            .getResponse();
-      });
-    }).on('error', (e) => {
-        console.error(e);
-        return handlerInput.responseBuilder
-            .speak("I'm sorry I ran into an error")
-            .reprompt("I'm sorry I ran into an error")
-            .getResponse();
-    });
+    return new Promise(resolve => {
+        https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
+            console.log('statusCode:', res.statusCode);
+            console.log('headers:', res.headers);
+    
+            var responseString = '';
+    
+            res.on('data', (d) => {
+                responseString += d;
+            });
+    
+            res.on('end', function(res) {
+                //var json_hash = JSON.parse(responseString);
+                // grab the first answer returned as text and have Alexa read it
+                //const speechOutput = json_hash['results'][0]['content']['text'];
+                console.log('==> Answering: ', responseString);
+                // speak the output
+                resolve(handlerInput.responseBuilder
+                    .speak(responseString)
+                    .reprompt(responseString)
+                    .getResponse());
+            });
+        }).on('error', (e) => {
+            console.error(e);
+            resolve(handlerInput.responseBuilder
+                .speak("I'm sorry I ran into an error")
+                .reprompt("I'm sorry I ran into an error")
+                .getResponse());
+        });
+    })
     /*return handlerInput.responseBuilder
             .speak("I can't help you")
             .reprompt("I can't help you")
