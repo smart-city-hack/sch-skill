@@ -93,33 +93,18 @@ const HelpIntentHandler = {
       }
     };
 
-    https.get('https://sch.barmetler.com/alexa/state', get_options, (res) => {
-      console.log('statusCode:', res.statusCode);
-      console.log('headers:', res.headers);
-
-      res.on('data', (d) => {
-        responseString += d;
-      });
-
-      res.on('end', function(res) {
-        //var json_hash = JSON.parse(responseString);
-        // grab the first answer returned as text and have Alexa read it
-        //const speechOutput = json_hash['results'][0]['content']['text'];
-        console.log('==> Answering: ', responseString);
-        // speak the output
-        return handlerInput.responseBuilder
-            .speak(responseString)
-            .reprompt(responseString)
-            .getResponse();
-      });
-    }).on('error', (e) => {
-      console.error(e);
-      return handlerInput.responseBuilder.speak("I'm sorry I ran into an error").reprompt("I'm sorry I ran into an error").getResponse();
-    });
-    return handlerInput.responseBuilder
-            .speak("I can't help you")
-            .reprompt("I can't help you")
-            .getResponse();
+    return util.https.get('https://sch.barmetler.com/alexa/state', get_options)
+        .then(responseString => {
+            console.log('==> Answering: ', responseString);
+            // speak the output
+            return handlerInput.responseBuilder
+                .speak(responseString)
+                .reprompt(responseString)
+                .getResponse();
+        },e=>{
+            console.error(e);
+            return handlerInput.responseBuilder.speak("I'm sorry I ran into an error").reprompt("I'm sorry I ran into an error").getResponse();
+        });
   }
 };
 
