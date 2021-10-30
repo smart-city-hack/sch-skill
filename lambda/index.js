@@ -56,7 +56,21 @@ const HelloWorldIntentHandler = {
         'Subscription-Key': "asd"
       }
     };
-    return util.https.get('https://sch.barmetler.com/alexa/help')
+    return util.https
+        .get('https://sch.barmetler.com/alexa/help')
+        .then(responseString => {
+            return handlerInput.responseBuilder
+                    .speak(responseString)
+                    .reprompt(responseString)
+                    .getResponse()
+        }, e => {
+            console.error(e);
+            return handlerInput.responseBuilder
+                .speak("I'm sorry I ran into an error")
+                .reprompt("I'm sorry I ran into an error")
+                .getResponse()
+        })
+        
     /*
     return new Promise(resolve => {
         https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
