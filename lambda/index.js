@@ -85,10 +85,6 @@ const HelloWorldIntentHandler = {
                 .getResponse());
         });
     })
-    /*return handlerInput.responseBuilder
-            .speak("I can't help you")
-            .reprompt("I can't help you")
-            .getResponse(); */
   }
 };
 
