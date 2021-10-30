@@ -5,6 +5,7 @@
  * */
 const Alexa = require('ask-sdk-core');
 const https = require('https');
+const util = require('./util')
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
