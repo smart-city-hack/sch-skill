@@ -56,7 +56,7 @@ module.exports.https = {
             })
             
             req.write(data)
-            req.close()
+            req.end()
         })
     }
 }
