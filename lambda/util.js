@@ -40,7 +40,7 @@ module.exports.https = {
     },
     post(url, options, data) {
         return new Promise((resolve, reject) => {
-            https.request(url, { ...(options || {}), method: 'POST' }, res => {
+            https.request(url, { (options || {})..., method: 'POST' }, res => {
         
                 var responseString = '';
         
