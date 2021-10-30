@@ -63,7 +63,7 @@ const HelloWorldIntentHandler = {
         'Subscription-Key': "asd"
       }
     };
-    await https.get('https://sch.barmetler.com/alexa/storeuser')
+    await https('https://sch.barmetler.com/alexa/storeuser')
     return https
         .get('https://sch.barmetler.com/alexa/help', get_options)
         .then(responseString => {
