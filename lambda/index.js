@@ -56,7 +56,7 @@ const HelloWorldIntentHandler = {
       }
     };
 
-    return await https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
+    https.get('https://sch.barmetler.com/alexa/help', get_options, (res) => {
       console.log('statusCode:', res.statusCode);
       console.log('headers:', res.headers);
 
