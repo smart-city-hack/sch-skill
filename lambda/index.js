@@ -101,7 +101,7 @@ const HelpIntentHandler = {
                 .speak(responseString)
                 .reprompt(responseString)
                 .getResponse();
-        },e=>{
+        }, e => {
             console.error(e);
             return handlerInput.responseBuilder.speak("I'm sorry I ran into an error").reprompt("I'm sorry I ran into an error").getResponse();
         });
