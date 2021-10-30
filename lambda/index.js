@@ -55,7 +55,7 @@ const HelloWorldIntentHandler = {
         'Subscription-Key': "asd"
       }
     };
-    return util.https
+    return https
         .get('https://sch.barmetler.com/alexa/help', get_options)
         .then(responseString => {
             return handlerInput.responseBuilder
@@ -92,7 +92,8 @@ const HelpIntentHandler = {
       }
     };
 
-    return util.https.get('https://sch.barmetler.com/alexa/state', get_options)
+    return https
+        .get('https://sch.barmetler.com/alexa/state', get_options)
         .then(responseString => {
             console.log('==> Answering: ', responseString);
             // speak the output
