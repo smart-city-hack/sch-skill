@@ -22,7 +22,18 @@ const https = require('https');
 module.exports.https = {
     get(url, options) {
         return new Promise(resolve => {
-            
+            https.get(url, options, res => {
+        
+                var responseString = '';
+        
+                res.on('data', (d) => {
+                    responseString += d;
+                });
+        
+                res.on('end', function(res) {
+                    resolve(responseString)
+                });
+            })
         })
     }
 }
