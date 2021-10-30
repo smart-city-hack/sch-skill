@@ -60,9 +60,9 @@ const HelloWorldIntentHandler = {
         .get('https://sch.barmetler.com/alexa/help')
         .then(responseString => {
             return handlerInput.responseBuilder
-                    .speak(responseString)
-                    .reprompt(responseString)
-                    .getResponse()
+                .speak(responseString)
+                .reprompt(responseString)
+                .getResponse()
         }, e => {
             console.error(e);
             return handlerInput.responseBuilder
