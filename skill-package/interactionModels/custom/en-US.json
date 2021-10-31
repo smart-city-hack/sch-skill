@@ -1,0 +1,156 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "traffic eyes",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "can I cross the street",
+            "help me with traffic lights",
+            "can you see the traffic lights"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "HelloWorldIntent",
+          "slots": [],
+          "samples": [
+            "hello",
+            "how are you",
+            "say hi world",
+            "say hi",
+            "hi",
+            "say hello world",
+            "say hello"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "SearchBetterTrafficLightIntent",
+          "slots": [],
+          "samples": [
+            "accessible traffic lights",
+            "accessible crossing",
+            "are there accessible pedestrian traffic lights",
+            "where are accessible crossing",
+            "show me the nearest accessible crossing",
+            "where are suitable traffic lights"
+          ]
+        },
+        {
+          "name": "DoesTrafficLightExistIntent",
+          "slots": [
+            {
+              "name": "distance",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "The traffic light is {distance} {unit} away",
+                "{distance} {unit} "
+              ]
+            },
+            {
+              "name": "unit",
+              "type": "UnitLength"
+            }
+          ],
+          "samples": [
+            "Is there an accessible traffic light {distance} {unit}  away"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "kilometers",
+                "synonyms": [
+                  "km",
+                  "kilometer"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "centimeters",
+                "synonyms": [
+                  "cm",
+                  "centimeter"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "meters",
+                "synonyms": [
+                  "m",
+                  "meter"
+                ]
+              }
+            }
+          ],
+          "name": "UnitLength"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "DoesTrafficLightExistIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "distance",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.809056371587.1605813568712"
+              }
+            },
+            {
+              "name": "unit",
+              "type": "UnitLength",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {}
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.809056371587.1605813568712",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "how far away can the traffic light be?"
+          },
+          {
+            "type": "PlainText",
+            "value": "what range the traffic light be within?"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "8"
+}
